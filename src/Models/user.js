@@ -32,11 +32,11 @@ const userScheme = new mongoose.Schema({
     role:{
         type:String,
         enum:['user','admin'],
-        default:true
+        default:"user"
     },
     contactNumber:{
         type:String,
-        required:true
+
     },
     profilePicture:{
         type:String
