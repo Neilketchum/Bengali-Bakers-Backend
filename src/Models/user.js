@@ -46,10 +46,12 @@ const userScheme = new mongoose.Schema({
 userScheme.virtual('password').set(function(password){
     this.hash_password = bcrypt.hashSync(password,6)
 })
-
+userScheme.virtual('fullName').get(function(){
+    return `${this.firstName} ${this.lastName}`
+})
 userScheme.methods  = {
     authenticate:function(password){
-        return bcrypt.compare(password,this.hash_password)
+        return bcrypt.compareSync(password,this.hash_password)
     }
 }
 
