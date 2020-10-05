@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const {signUp,signIn,requireSignin} = require("../controllers/auth")
-router.post('/signin',signIn)
+const {validateRequest,isRequestValidated,validateSignInRequest} = require('../validators/auth')
 
-router.post('/signup',signUp)
+router.post('/signin',validateSignInRequest,isRequestValidated,signIn)
+
+router.post('/signup',validateRequest,isRequestValidated,signUp)
 
 router.post('/profile',requireSignin,(req,res)=>{
     res.status(200).json({

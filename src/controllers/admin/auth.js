@@ -1,8 +1,11 @@
 const User = require('../../Models/user')
 const jwt = require('jsonwebtoken')
 const key = require('../../../config/dev')
+
 exports.signUp = (req,res)=>{
-    User.findOne({email:req.body.email}).exec((error,user)=>{
+
+
+    User.findOne({email:req.body.email,role :req.body.role}).exec((error,user)=>{
         if(user){
             res.status(400).send({
                 message:"Admin Already Registered"
@@ -15,7 +18,7 @@ exports.signUp = (req,res)=>{
             if(error){
                 console.log( error)
                 return res.status(400).json({
-                    message:"Please Try again Later"
+                    message:error
                 })
             }else{
                 console.log("No error")
