@@ -49,10 +49,3 @@ exports.signIn = (req,res) =>{
         }
     })
 }
-exports.requireSignin = (req,res,next)=>{
-    const token = req.headers.authorization.split(" ")[1];
-    // jwt.decode(req.)
-    const user = jwt.verify(token,key.JWTkey)
-    req.user = user
-    next()
-}
