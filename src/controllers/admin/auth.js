@@ -3,8 +3,6 @@ const jwt = require('jsonwebtoken')
 const key = require('../../../config/dev')
 
 exports.signUp = (req,res)=>{
-
-
     User.findOne({email:req.body.email,role :req.body.role}).exec((error,user)=>{
         if(user){
             res.status(400).send({
@@ -37,7 +35,7 @@ exports.signIn = (req,res) =>{
             })
         console.log(req.body)
         if(user.authenticate(req.body.password) && user.role === 'admin'){
-            const token = jwt.sign({_id:user._id},key.JWTkey,{expiresIn:'1h'});
+            const token = jwt.sign({_id:user._id,role:user.role},key.JWTkey,{expiresIn:'1h'});
             const {firstName,lastName,userName,email,role,fullName,_id} = user;
             res.status(200).json({
                 token,

@@ -6,7 +6,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const userRoutes = require("./routes/auth")
 const adminRoutes = require("./routes/admin/auth")
-
+const categoryRoutes = require('./routes/category')
 app.use(bodyParser());
 mongoose.connect('mongodb+srv://neil:123@cluster0.krfbl.mongodb.net/<dbname>?retryWrites=true&w=majority',{
         useCreateIndex:true,
@@ -21,6 +21,7 @@ mongoose.connect('mongodb+srv://neil:123@cluster0.krfbl.mongodb.net/<dbname>?ret
 })
 app.use('/api',userRoutes);
 app.use('/api',adminRoutes)
+app.use('/api',categoryRoutes)
 const PORT = process.env.PORT || 3000
 app.listen(PORT,()=>{
     console.log("Process",PORT)

@@ -32,9 +32,9 @@ exports.signIn = (req,res) =>{
             return res.status(400).json({
                 message:"Please Try Again"
             })
-        console.log(req.body)
+        // console.log(req.body)
         if(user.authenticate(req.body.password)){
-            const token = jwt.sign({_id:user._id},key.JWTkey,{expiresIn:'1h'});
+            const token = jwt.sign({_id:user._id,role:user.role},key.JWTkey,{expiresIn:'1h'});
             const {firstName,lastName,userName,email,role,fullName,_id} = user;
             res.status(200).json({
                 token,
