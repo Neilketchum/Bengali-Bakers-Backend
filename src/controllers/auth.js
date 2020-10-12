@@ -32,8 +32,8 @@ exports.signIn = (req,res) =>{
             return res.status(400).json({
                 message:"Please Try Again"
             })
-        // console.log(req.body)
-        if(user.authenticate(req.body.password)){
+        console.log(req.body)
+        if(user.authenticate(req.body.password) && user.role === 'user'){
             const token = jwt.sign({_id:user._id,role:user.role},key.JWTkey,{expiresIn:'1h'});
             const {firstName,lastName,userName,email,role,fullName,_id} = user;
             res.status(200).json({

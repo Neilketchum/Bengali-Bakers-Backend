@@ -18,7 +18,7 @@ exports.addProduct = (req,res,next) =>{
     // }
     let productPictures = []
     if(req.files.length > 0){
-        req.files.map(file=>{
+         req.files.map(file=>{
             productPictures.push({img:file.filename})
         })
     }
