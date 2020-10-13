@@ -9,7 +9,9 @@ const adminRoutes = require("./routes/admin/auth")
 const categoryRoutes = require('./routes/category')
 const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
-app.use(bodyParser());
+const path = require('path')
+app.use(express.json());
+app.use('/public',express.static(path.join(__dirname,'uploads')))
 mongoose.connect('mongodb+srv://neil:123@cluster0.krfbl.mongodb.net/<dbname>?retryWrites=true&w=majority',{
         useCreateIndex:true,
         useNewUrlParser:true,

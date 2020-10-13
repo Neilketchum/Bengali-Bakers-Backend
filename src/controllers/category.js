@@ -1,5 +1,6 @@
 const Category = require('../Models/category')
 const slugify = require('slugify')
+const dev = require('../../config/dev')
 function createCategories(categories,parentId = null)
 {
     const categoryList = []
@@ -22,9 +23,15 @@ function createCategories(categories,parentId = null)
 }
 
 exports.addCategory = (req,res)=>{
+    let categoryURL;
+    
     const catObj = {
         name : req.body.name,
         slug : slugify(req.body.name)
+    }
+    if(req.file){
+        categoryURL = `${dev.API}/public/${req.file.filename}`
+        catObj.categoryImage = categoryURL
     }
     if(req.body.parentId){
         catObj.parentId = req.body.parentId
